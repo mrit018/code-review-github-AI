@@ -1,0 +1,22 @@
+name: Automated Ollama Code Review
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  ollama_review:
+    runs-on: ubuntu-latest
+    name: Ollama Code Review Job
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Ollama Code Review
+        uses: qwen2.5-coder:3b@main
+        with:
+          llm-model: 'qwen2.5-coder:3b'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
